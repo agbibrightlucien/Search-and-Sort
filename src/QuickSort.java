@@ -58,12 +58,8 @@ public class QuickSort {
             VisualizationUtils.printSeparator();
         }
 
-        // =================================================================
-        // BLOCK 4: QUICK SORT ALGORITHM START
-        // =================================================================
-        // Start recursive quicksort with performance timing
         long start = System.nanoTime();
-        quickSort(arr, 0, n - 1); // Sort entire array
+        quickSort(arr, 0, n - 1);
         long end = System.nanoTime();
 
         System.out.println("Sorted array:");
@@ -72,9 +68,6 @@ public class QuickSort {
         System.out.println("Empirical Running Time: " + (end - start) + " ns");
     }
 
-    // =================================================================
-    // RECURSIVE QUICK SORT IMPLEMENTATION
-    // =================================================================
     private void quickSort(double[] arr, int low, int high) {
         if (low < high) {
             if (visualize) {
@@ -82,7 +75,6 @@ public class QuickSort {
                 printSubarray(arr, low, high, high, "Pivot: arr[" + high + "] = " + arr[high]);
             }
             
-            // Partition array and get pivot index
             int pi = partition(arr, low, high);
             
             if (visualize) {
@@ -92,37 +84,30 @@ public class QuickSort {
                 VisualizationUtils.pauseForVisualization();
             }
             
-            // Recursively sort elements before and after partition
-            quickSort(arr, low, pi - 1);  // Sort left subarray
-            quickSort(arr, pi + 1, high); // Sort right subarray
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
         }
     }
 
-    // =================================================================
-    // PARTITION FUNCTION - REARRANGE ARRAY AROUND PIVOT
-    // =================================================================
     private int partition(double[] arr, int low, int high) {
-        double pivot = arr[high]; // Choose last element as pivot
-        int i = low - 1; // Index of smaller element
+        double pivot = arr[high];
+        int i = low - 1;
 
         if (visualize) {
             System.out.println("Partitioning with pivot = " + pivot);
         }
 
-        // Scan through array and rearrange elements relative to pivot
         for (int j = low; j < high; j++) {
             if (visualize) {
                 printSubarray(arr, low, high, j, "Comparing arr[" + j + "] = " + arr[j] + " with pivot " + pivot);
             }
             
-            // If current element is smaller than or equal to pivot
             if (arr[j] < pivot) {
-                i++; // Increment index of smaller element
+                i++;
                 if (visualize && i != j) {
                     System.out.println("✓ " + arr[j] + " < " + pivot + ", swapping arr[" + i + "] with arr[" + j + "]");
                 }
                 
-                // Swap elements to move smaller element to left side
                 double temp = arr[i]; 
                 arr[i] = arr[j]; 
                 arr[j] = temp;
@@ -141,18 +126,16 @@ public class QuickSort {
             }
         }
 
-        // Place pivot in its correct final position
         if (visualize) {
             System.out.println("Final step: placing pivot in correct position");
             System.out.println("Swapping pivot arr[" + high + "] = " + arr[high] + " with arr[" + (i + 1) + "] = " + arr[i + 1]);
         }
 
-        // Swap pivot with element at position i+1
         double temp = arr[i + 1]; 
         arr[i + 1] = arr[high]; 
         arr[high] = temp;
         
-        return i + 1; // Return index of pivot in its final position
+        return i + 1;
     }
     
     private void printSubarray(double[] arr, int low, int high, int highlight, String message) {
