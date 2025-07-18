@@ -42,17 +42,70 @@ public class SelectionSort {
             }
         }
 
+        // Ask for visualization
+        System.out.print("Enable step-by-step visualization? (y/n): ");
+        scanner.nextLine(); // consume newline
+        boolean visualize = scanner.nextLine().toLowerCase().startsWith("y");
+
+        if (visualize) {
+            System.out.println("\n=== Selection Sort Visualization ===");
+            VisualizationUtils.printArray(arr, "Initial array:");
+            VisualizationUtils.printSeparator();
+        }
+
         long start = System.nanoTime();
 
         for (int i = 0; i < n - 1; i++) {
             int min = i;
-            for (int j = i + 1; j < n; j++) {
-                if (arr[j] < arr[min])
-                    min = j;
+            
+            if (visualize) {
+                System.out.println("Pass " + (i + 1) + ": Finding minimum in unsorted portion");
+                VisualizationUtils.printArray(arr, new int[]{i}, 
+                    "Starting position " + i + " (current minimum candidate: " + arr[i] + ")");
             }
+            
+            for (int j = i + 1; j < n; j++) {
+                if (visualize) {
+                    VisualizationUtils.printArray(arr, new int[]{min, j}, 
+                        "Comparing arr[" + min + "] = " + arr[min] + " with arr[" + j + "] = " + arr[j]);
+                }
+                
+                if (arr[j] < arr[min]) {
+                    min = j;
+                    if (visualize) {
+                        System.out.println("✓ New minimum found at index " + j + " (value: " + arr[j] + ")");
+                    }
+                } else {
+                    if (visualize) {
+                        System.out.println("✗ " + arr[j] + " ≥ " + arr[min] + ", keeping current minimum");
+                    }
+                }
+                
+                if (visualize && j < n - 1) {
+                    VisualizationUtils.pauseForVisualization();
+                }
+            }
+            
+            if (visualize) {
+                if (min != i) {
+                    System.out.println("Swapping arr[" + i + "] = " + arr[i] + " with arr[" + min + "] = " + arr[min]);
+                } else {
+                    System.out.println("No swap needed - element at position " + i + " is already minimum");
+                }
+            }
+            
+            // Swap elements
             int temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;
+            
+            if (visualize) {
+                VisualizationUtils.printArray(arr, new int[]{i}, "After placing minimum at position " + i + ":");
+                VisualizationUtils.printSeparator();
+                if (i < n - 2) {
+                    VisualizationUtils.pauseForVisualization();
+                }
+            }
         }
 
         long end = System.nanoTime();

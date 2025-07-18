@@ -44,16 +44,57 @@ public class InsertionSort {
             }
         }
 
+        // Ask for visualization
+        System.out.print("Enable step-by-step visualization? (y/n): ");
+        scanner.nextLine(); // consume newline
+        boolean visualize = scanner.nextLine().toLowerCase().startsWith("y");
+
+        if (visualize) {
+            System.out.println("\n=== Insertion Sort Visualization ===");
+            VisualizationUtils.printArray(arr, "Initial array:");
+            System.out.println("First element is considered sorted");
+            VisualizationUtils.printSeparator();
+        }
+
         long start = System.nanoTime();
 
         for (int i = 1; i < n; i++) {
             int key = arr[i];
             int j = i - 1;
+            
+            if (visualize) {
+                System.out.println("Step " + i + ": Inserting element " + key + " from position " + i);
+                VisualizationUtils.printArray(arr, new int[]{i}, 
+                    "Key to insert: " + key + " (highlighted position)");
+                System.out.println("Sorted portion: [0.." + (i-1) + "], Unsorted: [" + i + ".." + (n-1) + "]");
+            }
+            
             while (j >= 0 && arr[j] > key) {
+                if (visualize) {
+                    System.out.println("Comparing key " + key + " with arr[" + j + "] = " + arr[j]);
+                    System.out.println("Shifting " + arr[j] + " one position right");
+                }
+                
                 arr[j + 1] = arr[j];
                 j--;
+                
+                if (visualize) {
+                    VisualizationUtils.printArray(arr, new int[]{j + 2}, "After shifting:");
+                    VisualizationUtils.pauseForVisualization();
+                }
             }
+            
             arr[j + 1] = key;
+            
+            if (visualize) {
+                VisualizationUtils.printArray(arr, new int[]{j + 1}, 
+                    "Inserted " + key + " at position " + (j + 1) + ":");
+                System.out.println("Sorted portion now: [0.." + i + "]");
+                VisualizationUtils.printSeparator();
+                if (i < n - 1) {
+                    VisualizationUtils.pauseForVisualization();
+                }
+            }
         }
 
         long end = System.nanoTime();

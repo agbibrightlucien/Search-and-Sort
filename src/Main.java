@@ -6,10 +6,18 @@ import java.util.Scanner;
  * DESCRIPTION:
  * Provides a menu to allow the user to select a searching or sorting algorithm.
  * After selecting, the program runs the corresponding class implementation.
+ * Each algorithm now includes optional step-by-step visualization to help
+ * understand how the algorithm works internally.
  *
  * VALID ALGORITHMS:
  * - Searching: Linear Search, Binary Search
  * - Sorting: Bubble, Selection, Insertion, Merge, Quick
+ * 
+ * FEATURES:
+ * - Interactive menu-driven interface
+ * - Input validation and error handling
+ * - Performance timing measurements
+ * - Optional step-by-step visualization for educational purposes
  */
 
 public class Main {
