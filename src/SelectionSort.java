@@ -22,12 +22,16 @@ public class SelectionSort {
         Scanner scanner = new Scanner(System.in);
         int n;
 
+        // =================================================================
+        // BLOCK 1: INPUT VALIDATION AND ARRAY SETUP
+        // =================================================================
+        // Get valid array size and populate array with real numbers
         while (true) {
             System.out.print("Enter number of elements: ");
             if (scanner.hasNextInt()) {
                 n = scanner.nextInt();
-                if (n > 0) break;
-            } else scanner.next();
+                if (n > 0) break; // Valid size received
+            } else scanner.next(); // Clear invalid input
         }
 
         double[] arr = new double[n];
@@ -38,11 +42,14 @@ public class SelectionSort {
                 if (scanner.hasNextDouble()) {
                     arr[i] = scanner.nextDouble();
                     break;
-                } else scanner.next();
+                } else scanner.next(); // Clear invalid input
             }
         }
 
-        // Ask for visualization
+        // =================================================================
+        // BLOCK 2: VISUALIZATION SETUP AND ALGORITHM START
+        // =================================================================
+        // Configure visualization and start performance timing
         System.out.print("Enable step-by-step visualization? (y/n): ");
         scanner.nextLine(); // consume newline
         boolean visualize = scanner.nextLine().toLowerCase().startsWith("y");
@@ -55,8 +62,12 @@ public class SelectionSort {
 
         long start = System.nanoTime();
 
+        // =================================================================
+        // BLOCK 3: SELECTION SORT ALGORITHM IMPLEMENTATION
+        // =================================================================
+        // Main algorithm: find minimum element in unsorted portion and place it at the beginning
         for (int i = 0; i < n - 1; i++) {
-            int min = i;
+            int min = i; // Assume first unsorted element is minimum
             
             if (visualize) {
                 System.out.println("Pass " + (i + 1) + ": Finding minimum in unsorted portion");
@@ -64,12 +75,14 @@ public class SelectionSort {
                     "Starting position " + i + " (current minimum candidate: " + arr[i] + ")");
             }
             
+            // Search for actual minimum in remaining unsorted elements
             for (int j = i + 1; j < n; j++) {
                 if (visualize) {
                     VisualizationUtils.printArray(arr, new int[]{min, j}, 
                         "Comparing arr[" + min + "] = " + arr[min] + " with arr[" + j + "] = " + arr[j]);
                 }
                 
+                // Update minimum index if smaller element found
                 if (arr[j] < arr[min]) {
                     min = j;
                     if (visualize) {
@@ -94,7 +107,7 @@ public class SelectionSort {
                 }
             }
             
-            // Swap elements
+            // Swap minimum element with first unsorted element
             double temp = arr[i];
             arr[i] = arr[min];
             arr[min] = temp;

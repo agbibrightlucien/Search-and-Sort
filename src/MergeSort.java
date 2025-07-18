@@ -58,8 +58,12 @@ public class MergeSort {
             VisualizationUtils.printSeparator();
         }
 
+        // =================================================================
+        // BLOCK 4: MERGE SORT ALGORITHM START
+        // =================================================================
+        // Start recursive divide-and-conquer sorting
         long start = System.nanoTime();
-        mergeSort(arr, 0, n - 1);
+        mergeSort(arr, 0, n - 1); // Sort entire array
         long end = System.nanoTime();
 
         System.out.println("Sorted array:");
@@ -68,9 +72,12 @@ public class MergeSort {
         System.out.println("Empirical Running Time: " + (end - start) + " ns");
     }
 
+    // =================================================================
+    // RECURSIVE DIVIDE-AND-CONQUER MERGE SORT IMPLEMENTATION
+    // =================================================================
     private void mergeSort(double[] arr, int left, int right) {
         if (left < right) {
-            int mid = (left + right) / 2;
+            int mid = (left + right) / 2; // Find middle point to divide array
             
             if (visualize) {
                 System.out.println("Step " + step++ + ": Dividing array");
@@ -78,18 +85,24 @@ public class MergeSort {
                 VisualizationUtils.pauseForVisualization();
             }
             
-            mergeSort(arr, left, mid);
-            mergeSort(arr, mid + 1, right);
-            merge(arr, left, mid, right);
+            // Recursively sort left and right halves
+            mergeSort(arr, left, mid);      // Sort left half
+            mergeSort(arr, mid + 1, right); // Sort right half
+            merge(arr, left, mid, right);   // Merge sorted halves
         }
     }
 
+    // =================================================================
+    // MERGE TWO SORTED SUBARRAYS INTO ONE SORTED ARRAY
+    // =================================================================
     private void merge(double[] arr, int left, int mid, int right) {
+        // Calculate sizes of subarrays to be merged
         int n1 = mid - left + 1;
         int n2 = right - mid;
-        double[] L = new double[n1];
-        double[] R = new double[n2];
+        double[] L = new double[n1]; // Left subarray
+        double[] R = new double[n2]; // Right subarray
 
+        // Copy data to temporary arrays
         System.arraycopy(arr, left, L, 0, n1);
         System.arraycopy(arr, mid + 1, R, 0, n2);
 
@@ -102,13 +115,15 @@ public class MergeSort {
             System.out.println();
         }
 
-        int i = 0, j = 0, k = left;
+        int i = 0, j = 0, k = left; // Initialize pointers for merging
 
+        // Merge elements from both subarrays in sorted order
         while (i < n1 && j < n2) {
             if (visualize) {
                 System.out.println("Comparing L[" + i + "] = " + L[i] + " with R[" + j + "] = " + R[j]);
             }
             
+            // Take smaller element and advance corresponding pointer
             if (L[i] <= R[j]) {
                 arr[k++] = L[i++];
                 if (visualize) {

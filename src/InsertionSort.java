@@ -58,9 +58,13 @@ public class InsertionSort {
 
         long start = System.nanoTime();
 
+        // =================================================================
+        // BLOCK 4: INSERTION SORT ALGORITHM IMPLEMENTATION
+        // =================================================================
+        // Build sorted array one element at a time by inserting each element into correct position
         for (int i = 1; i < n; i++) {
-            double key = arr[i];
-            int j = i - 1;
+            double key = arr[i]; // Current element to be inserted into sorted portion
+            int j = i - 1; // Start from end of sorted portion
             
             if (visualize) {
                 System.out.println("Step " + i + ": Inserting element " + key + " from position " + i);
@@ -69,14 +73,15 @@ public class InsertionSort {
                 System.out.println("Sorted portion: [0.." + (i-1) + "], Unsorted: [" + i + ".." + (n-1) + "]");
             }
             
+            // Shift elements that are greater than key to make space for insertion
             while (j >= 0 && arr[j] > key) {
                 if (visualize) {
                     System.out.println("Comparing key " + key + " with arr[" + j + "] = " + arr[j]);
                     System.out.println("Shifting " + arr[j] + " one position right");
                 }
                 
-                arr[j + 1] = arr[j];
-                j--;
+                arr[j + 1] = arr[j]; // Move element one position right
+                j--; // Move to next element in sorted portion
                 
                 if (visualize) {
                     VisualizationUtils.printArray(arr, new int[]{j + 2}, "After shifting:");
@@ -84,7 +89,7 @@ public class InsertionSort {
                 }
             }
             
-            arr[j + 1] = key;
+            arr[j + 1] = key; // Insert key at correct position in sorted portion
             
             if (visualize) {
                 VisualizationUtils.printArray(arr, new int[]{j + 1}, 
