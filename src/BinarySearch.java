@@ -38,13 +38,13 @@ public class BinarySearch {
             }
         }
 
-        int[] arr = new int[n];
-        System.out.println("Enter " + n + " integers (they will be sorted for binary search):");
+        double[] arr = new double[n];
+        System.out.println("Enter " + n + " real numbers (they will be sorted for binary search):");
         for (int i = 0; i < n; i++) {
             while (true) {
                 System.out.print("Element [" + i + "]: ");
-                if (scanner.hasNextInt()) {
-                    arr[i] = scanner.nextInt();
+                if (scanner.hasNextDouble()) {
+                    arr[i] = scanner.nextDouble();
                     break;
                 } else {
                     System.out.println("Invalid input!");
@@ -55,14 +55,14 @@ public class BinarySearch {
 
         Arrays.sort(arr); // Binary search requires sorted input
         System.out.println("Array sorted for binary search: ");
-        for (int num : arr) System.out.print(num + " ");
+        for (double num : arr) System.out.print(num + " ");
         System.out.println();
 
-        int key;
+        double key;
         while (true) {
             System.out.print("Enter the search key: ");
-            if (scanner.hasNextInt()) {
-                key = scanner.nextInt();
+            if (scanner.hasNextDouble()) {
+                key = scanner.nextDouble();
                 break;
             } else {
                 System.out.println("Invalid input!");
@@ -97,7 +97,7 @@ public class BinarySearch {
                 System.out.println("Comparing " + arr[mid] + " with key " + key);
             }
             
-            if (arr[mid] == key) {
+            if (Math.abs(arr[mid] - key) < 1e-9) {
                 index = mid;
                 if (visualize) {
                     System.out.println("✓ Found! Key " + key + " matches value at index " + mid);

@@ -34,13 +34,13 @@ public class MergeSort {
             } else scanner.next();
         }
 
-        int[] arr = new int[n];
-        System.out.println("Enter " + n + " integers:");
+        double[] arr = new double[n];
+        System.out.println("Enter " + n + " real numbers:");
         for (int i = 0; i < n; i++) {
             while (true) {
                 System.out.print("Element [" + i + "]: ");
-                if (scanner.hasNextInt()) {
-                    arr[i] = scanner.nextInt();
+                if (scanner.hasNextDouble()) {
+                    arr[i] = scanner.nextDouble();
                     break;
                 } else scanner.next();
             }
@@ -63,12 +63,12 @@ public class MergeSort {
         long end = System.nanoTime();
 
         System.out.println("Sorted array:");
-        for (int num : arr) System.out.print(num + " ");
+        for (double num : arr) System.out.print(num + " ");
         System.out.println("\nTime Complexity: O(n log n)");
         System.out.println("Empirical Running Time: " + (end - start) + " ns");
     }
 
-    private void mergeSort(int[] arr, int left, int right) {
+    private void mergeSort(double[] arr, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
             
@@ -84,11 +84,11 @@ public class MergeSort {
         }
     }
 
-    private void merge(int[] arr, int left, int mid, int right) {
+    private void merge(double[] arr, int left, int mid, int right) {
         int n1 = mid - left + 1;
         int n2 = right - mid;
-        int[] L = new int[n1];
-        int[] R = new int[n2];
+        double[] L = new double[n1];
+        double[] R = new double[n2];
 
         System.arraycopy(arr, left, L, 0, n1);
         System.arraycopy(arr, mid + 1, R, 0, n2);
@@ -96,9 +96,9 @@ public class MergeSort {
         if (visualize) {
             System.out.println("Merging subarrays:");
             System.out.print("Left subarray: ");
-            for (int num : L) System.out.print(num + " ");
+            for (double num : L) System.out.print(num + " ");
             System.out.print("\nRight subarray: ");
-            for (int num : R) System.out.print(num + " ");
+            for (double num : R) System.out.print(num + " ");
             System.out.println();
         }
 
@@ -143,7 +143,7 @@ public class MergeSort {
         }
     }
     
-    private void printSubarray(int[] arr, int left, int right, int mid, String message) {
+    private void printSubarray(double[] arr, int left, int right, int mid, String message) {
         System.out.println(message);
         System.out.print("Array: [");
         for (int i = 0; i < arr.length; i++) {

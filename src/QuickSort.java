@@ -34,13 +34,13 @@ public class QuickSort {
             } else scanner.next();
         }
 
-        int[] arr = new int[n];
-        System.out.println("Enter " + n + " integers:");
+        double[] arr = new double[n];
+        System.out.println("Enter " + n + " real numbers:");
         for (int i = 0; i < n; i++) {
             while (true) {
                 System.out.print("Element [" + i + "]: ");
-                if (scanner.hasNextInt()) {
-                    arr[i] = scanner.nextInt();
+                if (scanner.hasNextDouble()) {
+                    arr[i] = scanner.nextDouble();
                     break;
                 } else scanner.next();
             }
@@ -63,12 +63,12 @@ public class QuickSort {
         long end = System.nanoTime();
 
         System.out.println("Sorted array:");
-        for (int num : arr) System.out.print(num + " ");
+        for (double num : arr) System.out.print(num + " ");
         System.out.println("\nTime Complexity: O(n log n) average, O(n²) worst");
         System.out.println("Empirical Running Time: " + (end - start) + " ns");
     }
 
-    private void quickSort(int[] arr, int low, int high) {
+    private void quickSort(double[] arr, int low, int high) {
         if (low < high) {
             if (visualize) {
                 System.out.println("Step " + step++ + ": Sorting range [" + low + ".." + high + "]");
@@ -89,8 +89,8 @@ public class QuickSort {
         }
     }
 
-    private int partition(int[] arr, int low, int high) {
-        int pivot = arr[high];
+    private int partition(double[] arr, int low, int high) {
+        double pivot = arr[high];
         int i = low - 1;
 
         if (visualize) {
@@ -108,7 +108,7 @@ public class QuickSort {
                     System.out.println("✓ " + arr[j] + " < " + pivot + ", swapping arr[" + i + "] with arr[" + j + "]");
                 }
                 
-                int temp = arr[i]; 
+                double temp = arr[i]; 
                 arr[i] = arr[j]; 
                 arr[j] = temp;
                 
@@ -131,14 +131,14 @@ public class QuickSort {
             System.out.println("Swapping pivot arr[" + high + "] = " + arr[high] + " with arr[" + (i + 1) + "] = " + arr[i + 1]);
         }
 
-        int temp = arr[i + 1]; 
+        double temp = arr[i + 1]; 
         arr[i + 1] = arr[high]; 
         arr[high] = temp;
         
         return i + 1;
     }
     
-    private void printSubarray(int[] arr, int low, int high, int highlight, String message) {
+    private void printSubarray(double[] arr, int low, int high, int highlight, String message) {
         System.out.println(message);
         System.out.print("Array: [");
         for (int i = 0; i < arr.length; i++) {

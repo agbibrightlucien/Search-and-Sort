@@ -106,4 +106,77 @@ public class VisualizationUtils {
         System.out.println("Low: " + low + ", Mid: " + mid + ", High: " + high);
         System.out.println();
     }
+    
+    /**
+     * Prints a double array with optional highlighting of specific indices
+     * @param arr The array to display
+     * @param highlight Array of indices to highlight (can be null)
+     * @param message Optional message to display above the array
+     */
+    public static void printArray(double[] arr, int[] highlight, String message) {
+        if (message != null && !message.isEmpty()) {
+            System.out.println(message);
+        }
+        
+        // Print array with highlighting
+        System.out.print("Array: [");
+        for (int i = 0; i < arr.length; i++) {
+            boolean isHighlighted = highlight != null && contains(highlight, i);
+            
+            if (isHighlighted) {
+                System.out.print("*" + arr[i] + "*");
+            } else {
+                System.out.print(arr[i]);
+            }
+            
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        
+        // Print indices
+        System.out.print("Index: [");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(i);
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println();
+    }
+    
+    /**
+     * Prints a double array without highlighting
+     * @param arr The array to display
+     * @param message Optional message to display above the array
+     */
+    public static void printArray(double[] arr, String message) {
+        printArray(arr, null, message);
+    }
+    
+    /**
+     * Prints range indicators for binary search with double arrays
+     */
+    public static void printSearchRange(double[] arr, int low, int high, int mid, String message) {
+        System.out.println(message);
+        System.out.print("Array: [");
+        for (int i = 0; i < arr.length; i++) {
+            if (i == mid) {
+                System.out.print("*" + arr[i] + "*");
+            } else if (i >= low && i <= high) {
+                System.out.print(arr[i]);
+            } else {
+                System.out.print("_");
+            }
+            
+            if (i < arr.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Low: " + low + ", Mid: " + mid + ", High: " + high);
+        System.out.println();
+    }
 }

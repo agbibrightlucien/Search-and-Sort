@@ -41,32 +41,32 @@ public class LinearSearch {
             }
         }
 
-        int[] array = new int[n];
+        double[] array = new double[n];
 
         // Input elements with validation
-        System.out.println("Enter " + n + " integers:");
+        System.out.println("Enter " + n + " real numbers:");
         for (int i = 0; i < n; i++) {
             while (true) {
                 System.out.print("Element [" + i + "]: ");
-                if (scanner.hasNextInt()) {
-                    array[i] = scanner.nextInt();
+                if (scanner.hasNextDouble()) {
+                    array[i] = scanner.nextDouble();
                     break;
                 } else {
-                    System.out.println("Invalid input! Please enter an integer.");
+                    System.out.println("Invalid input! Please enter a real number.");
                     scanner.next();
                 }
             }
         }
 
         // Input key with validation
-        int key;
+        double key;
         while (true) {
             System.out.print("Enter the key to search for: ");
-            if (scanner.hasNextInt()) {
-                key = scanner.nextInt();
+            if (scanner.hasNextDouble()) {
+                key = scanner.nextDouble();
                 break;
             } else {
-                System.out.println("Invalid input! Please enter an integer.");
+                System.out.println("Invalid input! Please enter a real number.");
                 scanner.next();
             }
         }
@@ -93,7 +93,7 @@ public class LinearSearch {
                 VisualizationUtils.printArray(array, new int[]{i}, 
                     "Step " + (i + 1) + ": Checking index " + i + " (value: " + array[i] + ")");
                 
-                if (array[i] == key) {
+                if (Math.abs(array[i] - key) < 1e-9) {
                     System.out.println("✓ Found! Key " + key + " matches value at index " + i);
                 } else {
                     System.out.println("✗ No match. " + array[i] + " ≠ " + key);
@@ -104,7 +104,7 @@ public class LinearSearch {
                 }
             }
             
-            if (array[i] == key) {
+            if (Math.abs(array[i] - key) < 1e-9) {
                 index = i;
                 break;
             }

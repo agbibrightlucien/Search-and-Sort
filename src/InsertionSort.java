@@ -32,13 +32,13 @@ public class InsertionSort {
             } else scanner.next();
         }
 
-        int[] arr = new int[n];
-        System.out.println("Enter " + n + " integers:");
+        double[] arr = new double[n];
+        System.out.println("Enter " + n + " real numbers:");
         for (int i = 0; i < n; i++) {
             while (true) {
                 System.out.print("Element [" + i + "]: ");
-                if (scanner.hasNextInt()) {
-                    arr[i] = scanner.nextInt();
+                if (scanner.hasNextDouble()) {
+                    arr[i] = scanner.nextDouble();
                     break;
                 } else scanner.next();
             }
@@ -59,7 +59,7 @@ public class InsertionSort {
         long start = System.nanoTime();
 
         for (int i = 1; i < n; i++) {
-            int key = arr[i];
+            double key = arr[i];
             int j = i - 1;
             
             if (visualize) {
@@ -100,7 +100,7 @@ public class InsertionSort {
         long end = System.nanoTime();
 
         System.out.println("Sorted array:");
-        for (int num : arr) System.out.print(num + " ");
+        for (double num : arr) System.out.print(num + " ");
         System.out.println("\nTime Complexity: O(n²)");
         System.out.println("Empirical Running Time: " + (end - start) + " ns");
     }
