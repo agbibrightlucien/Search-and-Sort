@@ -7,6 +7,55 @@ import java.util.Scanner;
  * Searches for a given key in an unsorted array by checking each element one by one.
  * Returns the index of the first match or -1 if not found.
  *
+ * FLOWCHART:
+ * ┌─────────────────┐
+ * │      START      │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Input array size│
+ * │ and elements    │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Input search key│
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Initialize i = 0│
+ * │ index = -1      │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ *      ┌─────────┐
+ *      │ i < n ? │◄──────────┐
+ *      └────┬────┘           │
+ *      YES  │                │
+ *           ▼                │
+ *   ┌─────────────────┐      │
+ *   │ A[i] == key ?   │      │
+ *   └─────┬─────┬─────┘      │
+ *    YES  │     │ NO         │
+ *         ▼     ▼            │
+ * ┌───────────┐ ┌─────────┐  │
+ * │index = i  │ │ i = i+1 │──┘
+ * │   FOUND   │ └─────────┘
+ * └─────┬─────┘
+ *       │
+ *       ▼
+ * ┌─────────────────┐
+ * │ Return index    │
+ * │ (-1 if not found│
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │      END        │
+ * └─────────────────┘
+ *
  * PSEUDOCODE:
  * for i ← 0 to n - 1 do
  *     if A[i] == key then

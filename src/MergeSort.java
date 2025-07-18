@@ -6,6 +6,90 @@ import java.util.Scanner;
  * DESCRIPTION:
  * Recursively splits the array in half, sorts each half, then merges the sorted halves.
  *
+ * FLOWCHART:
+ * ┌─────────────────┐
+ * │      START      │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Input array     │
+ * │ elements        │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Call mergeSort  │
+ * │ (A, 0, n-1)     │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ MERGE SORT      │
+ * │ FUNCTION        │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ *    ┌──────────────┐
+ *    │ left < right?│
+ *    └─────┬────────┘
+ *     YES  │
+ *          ▼
+ * ┌─────────────────┐
+ * │ mid = (left +   │
+ * │       right)/2  │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ mergeSort       │
+ * │ (A,left,mid)    │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ mergeSort       │
+ * │ (A,mid+1,right) │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ MERGE FUNCTION  │
+ * │ Combine sorted  │
+ * │ left & right    │
+ * │ subarrays       │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Create temp     │
+ * │ arrays L[], R[] │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Copy data to    │
+ * │ L[] and R[]     │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Merge L[] and   │
+ * │ R[] back to A[] │
+ * │ in sorted order │
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │ Return to       │
+ * │ calling function│
+ * └─────────┬───────┘
+ *           │
+ *           ▼
+ * ┌─────────────────┐
+ * │      END        │
+ * └─────────────────┘
+ *
  * PSEUDOCODE:
  * mergeSort(A, left, right):
  *     if left < right:
