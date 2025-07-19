@@ -120,39 +120,12 @@ public class LinearSearch {
             }
         }
 
-        // Ask for visualization
-        System.out.print("Enable step-by-step visualization? (y/n): ");
-        scanner.nextLine(); // consume newline
-        boolean visualize = scanner.nextLine().toLowerCase().startsWith("y");
-
-        if (visualize) {
-            System.out.println("\n=== Linear Search Visualization ===");
-            VisualizationUtils.printArray(array, "Initial array:");
-            System.out.println("Searching for key: " + key);
-            VisualizationUtils.printSeparator();
-        }
-
         // Start timing
         long startTime = System.nanoTime();
 
-        // Linear Search logic with visualization
+        // Linear Search logic
         int index = -1;
         for (int i = 0; i < n; i++) {
-            if (visualize) {
-                VisualizationUtils.printArray(array, new int[]{i}, 
-                    "Step " + (i + 1) + ": Checking index " + i + " (value: " + array[i] + ")");
-                
-                if (Math.abs(array[i] - key) < 1e-9) {
-                    System.out.println("✓ Found! Key " + key + " matches value at index " + i);
-                } else {
-                    System.out.println("✗ No match. " + array[i] + " ≠ " + key);
-                }
-                
-                if (i < n - 1) {
-                    VisualizationUtils.pauseForVisualization();
-                }
-            }
-            
             if (Math.abs(array[i] - key) < 1e-9) {
                 index = i;
                 break;
