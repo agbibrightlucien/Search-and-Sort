@@ -103,8 +103,6 @@ import java.util.Scanner;
  */
 
 public class MergeSort {
-    private boolean visualize = false;
-    private int step = 1;
     
     public void run() {
         Scanner scanner = new Scanner(System.in);
@@ -130,18 +128,7 @@ public class MergeSort {
             }
         }
 
-        // Ask for visualization
-        System.out.print("Enable step-by-step visualization? (y/n): ");
-        scanner.nextLine(); // consume newline
-        visualize = scanner.nextLine().toLowerCase().startsWith("y");
-
-        if (visualize) {
-            System.out.println("\n=== Merge Sort Visualization ===");
-            VisualizationUtils.printArray(arr, "Initial array:");
-            System.out.println("Merge Sort uses divide-and-conquer approach");
-            VisualizationUtils.printSeparator();
-        }
-
+        // Start sorting process
         long start = System.nanoTime();
         mergeSort(arr, 0, n - 1);
         long end = System.nanoTime();
@@ -153,17 +140,16 @@ public class MergeSort {
     }
 
     private void mergeSort(double[] arr, int left, int right) {
+        // Base case: if left < right, divide the array
         if (left < right) {
+            // Find the middle point to divide the array into two halves
             int mid = (left + right) / 2;
             
-            if (visualize) {
-                System.out.println("Step " + step++ + ": Dividing array");
-                printSubarray(arr, left, right, mid, "Dividing range [" + left + ".." + right + "] at mid = " + mid);
-                VisualizationUtils.pauseForVisualization();
-            }
-            
+            // Recursively sort both halves
             mergeSort(arr, left, mid);
             mergeSort(arr, mid + 1, right);
+            
+            // Merge the sorted halves
             merge(arr, left, mid, right);
         }
     }
@@ -174,79 +160,29 @@ public class MergeSort {
         double[] L = new double[n1];
         double[] R = new double[n2];
 
+        // Copy data to temporary arrays
         System.arraycopy(arr, left, L, 0, n1);
         System.arraycopy(arr, mid + 1, R, 0, n2);
 
-        if (visualize) {
-            System.out.println("Merging subarrays:");
-            System.out.print("Left subarray: ");
-            for (double num : L) System.out.print(num + " ");
-            System.out.print("\nRight subarray: ");
-            for (double num : R) System.out.print(num + " ");
-            System.out.println();
-        }
-
+        // Initial indexes of first and second subarrays, and merged subarray
         int i = 0, j = 0, k = left;
 
+        // Merge the temporary arrays back into arr[left..right]
         while (i < n1 && j < n2) {
-            if (visualize) {
-                System.out.println("Comparing L[" + i + "] = " + L[i] + " with R[" + j + "] = " + R[j]);
-            }
-            
             if (L[i] <= R[j]) {
                 arr[k++] = L[i++];
-                if (visualize) {
-                    System.out.println("Taking " + L[i-1] + " from left subarray");
-                }
             } else {
                 arr[k++] = R[j++];
-                if (visualize) {
-                    System.out.println("Taking " + R[j-1] + " from right subarray");
-                }
             }
         }
 
+        // Copy the remaining elements of L[], if any
         while (i < n1) {
             arr[k++] = L[i++];
-            if (visualize) {
-                System.out.println("Copying remaining " + L[i-1] + " from left");
-            }
         }
-        
+        // Copy the remaining elements of R[], if any
         while (j < n2) {
             arr[k++] = R[j++];
-            if (visualize) {
-                System.out.println("Copying remaining " + R[j-1] + " from right");
-            }
         }
-
-        if (visualize) {
-            printSubarray(arr, left, right, -1, "Merged result for range [" + left + ".." + right + "]:");
-            VisualizationUtils.printSeparator();
-            VisualizationUtils.pauseForVisualization();
-        }
-    }
-    
-    private void printSubarray(double[] arr, int left, int right, int mid, String message) {
-        System.out.println(message);
-        System.out.print("Array: [");
-        for (int i = 0; i < arr.length; i++) {
-            if (i >= left && i <= right) {
-                if (mid != -1 && i == mid) {
-                    System.out.print("*" + arr[i] + "*");
-                } else {
-                    System.out.print(arr[i]);
-                }
-            } else {
-                System.out.print("_");
-            }
-            
-            if (i < arr.length - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println("]");
-        System.out.println("Range: [" + left + ".." + right + "]" + (mid != -1 ? ", Mid: " + mid : ""));
-        System.out.println();
     }
 }
