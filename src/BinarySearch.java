@@ -135,55 +135,21 @@ public class BinarySearch {
             }
         }
 
-        // Ask for visualization
-        System.out.print("Enable step-by-step visualization? (y/n): ");
-        scanner.nextLine(); // consume newline
-        boolean visualize = scanner.nextLine().toLowerCase().startsWith("y");
-
-        if (visualize) {
-            System.out.println("\n=== Binary Search Visualization ===");
-            VisualizationUtils.printArray(arr, "Sorted array:");
-            System.out.println("Searching for key: " + key);
-            VisualizationUtils.printSeparator();
-        }
-
         long start = System.nanoTime();
 
         int low = 0, high = n - 1, mid, index = -1;
-        int step = 1;
         
         while (low <= high) {
             mid = (low + high) / 2;
             
-            if (visualize) {
-                VisualizationUtils.printSearchRange(arr, low, high, mid, 
-                    "Step " + step + ": Searching in range [" + low + ", " + high + "]");
-                System.out.println("Mid element: arr[" + mid + "] = " + arr[mid]);
-                System.out.println("Comparing " + arr[mid] + " with key " + key);
-            }
-            
             if (Math.abs(arr[mid] - key) < 1e-9) {
                 index = mid;
-                if (visualize) {
-                    System.out.println("✓ Found! Key " + key + " matches value at index " + mid);
-                }
                 break;
             } else if (key < arr[mid]) {
                 high = mid - 1;
-                if (visualize) {
-                    System.out.println("Key " + key + " < " + arr[mid] + ", searching left half");
-                }
             } else {
                 low = mid + 1;
-                if (visualize) {
-                    System.out.println("Key " + key + " > " + arr[mid] + ", searching right half");
-                }
             }
-            
-            if (visualize && low <= high) {
-                VisualizationUtils.pauseForVisualization();
-            }
-            step++;
         }
 
         long end = System.nanoTime();
