@@ -1,4 +1,4 @@
-# Complete Algorithm Guide for High School Students
+# Complete Algorithm Guide
 
 ## Table of Contents
 1. [Introduction](#introduction)
